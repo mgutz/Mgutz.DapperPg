@@ -7,4 +7,7 @@ commands:
 
   migrate: dat up
 
-  server: dotnet run --project Mgutz.DapperPg
+  server:
+    desc: Starts WebApi server
+    tasks:
+      - xsh: dotnet run --project Mgutz.DapperPg

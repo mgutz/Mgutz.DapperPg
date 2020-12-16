@@ -24,7 +24,7 @@ In another terminal, run the project
 # first DB run migrations with your own utility
 dat up
 
-# run server 
+# run server
 dotnet run --project Mgutz.DapperPg
 ```
 
@@ -32,7 +32,7 @@ In another terminal, interact with the API
 
 ```sh
 # create a product
-curl -H 'Content-Type: application/json' -d '{"name": "Apple", "cost": 0.50' http://localhost:5000/api/product -v
+curl -H 'Content-Type: application/json' -d '{"name": "Apple", "cost": 0.50}' http://localhost:5000/api/product -v
 
 # list products
 curl http://localhost:5000/api/product

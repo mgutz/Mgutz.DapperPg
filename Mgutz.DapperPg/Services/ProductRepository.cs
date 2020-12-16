@@ -21,7 +21,7 @@ namespace Mgutz.DapperPg.Services {
             var stmt = @"select * from products where id = @id";
 
             return await WithConnection(async conn => {
-                return await conn.QueryFirstOrDefaultAsync<Product>(stmt);
+                return await conn.QueryFirstOrDefaultAsync<Product>(stmt, new { Id = id });
             });
         }
 
