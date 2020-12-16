@@ -24,8 +24,8 @@ In another terminal, run the project
 # first DB run migrations with your own utility
 dat up
 
-# run server
-dotnet run Mgutz.DapperPg
+# run server 
+dotnet run --project Mgutz.DapperPg
 ```
 
 In another terminal, interact with the API
