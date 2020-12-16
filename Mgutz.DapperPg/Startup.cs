@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Data;
+using Npgsql;
 
 namespace Mgutz.DapperPg {
     public class Startup {
@@ -16,8 +18,10 @@ namespace Mgutz.DapperPg {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
             ColumnMapper.Initialize();
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
-            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IDbConnection>(_ => new NpgsqlConnection(connectionString));
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddMvc();
 
             services.AddOpenApiDocument(config => {

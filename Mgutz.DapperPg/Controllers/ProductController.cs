@@ -15,7 +15,7 @@ namespace Mgutz.DapperPg.Controllers {
 
         [HttpGet]
         public async Task<ActionResult<Product>> GetAll() {
-            var products = await _productRepository.GetAllProducts();
+            var products = await _productRepository.GetAll();
             return Ok(products);
         }
 
@@ -28,17 +28,17 @@ namespace Mgutz.DapperPg.Controllers {
 
         [HttpPost]
         public async Task<ActionResult> AddProduct(Product entity) {
-            return Ok(await _productRepository.AddProduct(entity));
+            return Ok(await _productRepository.Add(entity));
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Product>> Update(Product entity, int id) {
-            return Ok(await _productRepository.UpdateProduct(entity, id));
+            return Ok(await _productRepository.Update(entity, id));
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id) {
-            await _productRepository.RemoveProduct(id);
+            await _productRepository.Remove(id);
             return Ok();
         }
     }

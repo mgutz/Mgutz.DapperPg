@@ -28,7 +28,10 @@ dat up
 dotnet run --project Mgutz.DapperPg
 ```
 
-In another terminal, interact with the API
+Browse `https://localhost:5000/swagger` to interact with the API through swagger
+UI.
+
+### Interact with API via Terminal
 
 ```sh
 # create a product
@@ -41,6 +44,10 @@ curl http://localhost:5000/api/product
 curl http://localhost:5000/api/product/1000
 
 ```
+
+## Notes
+
+- No need to use using statement. Dapper will automatically open, close and dispose of the connection.
 
 ## Credit
 
