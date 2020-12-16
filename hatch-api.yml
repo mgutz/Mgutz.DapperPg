@@ -1,0 +1,34 @@
+HATCH: "1.0"
+
+vars:
+  url: "http://localhost:5000/api/product"
+
+commands:
+  post:
+    vars:
+      name:
+        kind: string
+        isPrompt: true
+        required: true
+
+      cost:
+        kind: float
+        isPrompt: true
+        required: true
+
+    tasks:
+      - xsh: |
+          # -d implies POST
+          curl -H 'Content-Type: application/json' -d '{"name": "{{.name}}", "cost": {{.cost}}}' {{.url}} -v
+
+  all: curl {{.url}}
+
+  get:
+    vars:
+      id:
+        kind: int
+        isPrompt: true
+        required: true
+
+    tasks:
+      - xsh: curl {{.url}}/{{.id}}

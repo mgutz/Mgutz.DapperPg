@@ -1,0 +1,7 @@
+HATCH: "1.0"
+
+desc: Manage project services
+
+commands:
+  up: docker-compose up
+  down: docker-compose down

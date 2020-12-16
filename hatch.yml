@@ -1,0 +1,10 @@
+HATCH: "1.0"
+
+desc: Project commands
+
+commands:
+  psql: docker-compose exec postgres psql -U dev_user dev_db
+
+  migrate: dat up
+
+  server: dotnet run --project Mgutz.DapperPg

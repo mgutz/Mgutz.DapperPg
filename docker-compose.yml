@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+  postgres:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_password
+      POSTGRES_DB: dev_db
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+
+    # vscode throws an exception during initialization when enumerating
+    # root owned docker directories. Intellisense fails. Container dir
+    # MUST exist outside of the project.
+    volumes:
+      - ../_docker.vol/Mgutz.DapperPg/dev/postgres-data:/var/lib/postgresql/data
