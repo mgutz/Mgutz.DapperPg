@@ -28,7 +28,7 @@ dat up
 dotnet run --project Mgutz.DapperPg
 ```
 
-Browse `https://localhost:5000/swagger` to interact with the API through swagger
+Browse `http://localhost:5000/swagger` to interact with the API through swagger
 UI.
 
 ### Interact with API via Terminal

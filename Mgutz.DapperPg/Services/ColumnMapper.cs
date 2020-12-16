@@ -1,4 +1,3 @@
-using System;
 using Dapper.FluentMap.Conventions;
 using Dapper.FluentMap;
 using System.Text.RegularExpressions;

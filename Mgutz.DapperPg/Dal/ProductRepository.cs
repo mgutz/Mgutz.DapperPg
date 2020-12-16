@@ -3,9 +3,8 @@ using Mgutz.DapperPg.Models;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 
-namespace Mgutz.DapperPg.Services {
+namespace Mgutz.DapperPg.Dal {
     public class ProductRepository : IProductRepository {
         private readonly IDbConnection _dbConnection;
 
@@ -52,7 +51,6 @@ namespace Mgutz.DapperPg.Services {
                 stmt,
                 new { Name = entity.Name, Cost = entity.Cost, Id = id }
             );
-
             // TODO auto-generate clone method
             entity.Id = id;
             entity.UpdatedAt = p.UpdatedAt;

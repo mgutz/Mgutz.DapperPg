@@ -1,6 +1,8 @@
-﻿using Mgutz.DapperPg.Services;
+﻿using Mgutz.DapperPg.Dal;
+using Mgutz.DapperPg.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,14 +22,21 @@ namespace Mgutz.DapperPg {
             ColumnMapper.Initialize();
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
+            services.AddHttpContextAccessor();
             services.AddTransient<IDbConnection>(_ => new NpgsqlConnection(connectionString));
             services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddMvc();
+            services.AddScoped<RequestContext>(provider => {
+                var context = provider.GetRequiredService<IHttpContextAccessor>();
 
+                // TODO extract request context from header value
+                var token = context?.HttpContext?.Request.Headers["dummy_token"];
+                return new RequestContext { UserId = 42 };
+            });
+            services.AddScoped<IProductService, ProductService>();
+            services.AddMvc();
             services.AddOpenApiDocument(config => {
                 config.Title = "ASPNET CORE 5/WebAPI/Dapper Async/PostgreSQL Prototype";
             });
-
             services.AddControllers();
         }
 
@@ -36,16 +45,11 @@ namespace Mgutz.DapperPg {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseOpenApi();
             app.UseSwaggerUi3();
-
             //app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });

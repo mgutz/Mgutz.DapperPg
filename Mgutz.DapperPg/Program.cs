@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace Mgutz.DapperPg {
@@ -9,10 +10,8 @@ namespace Mgutz.DapperPg {
                 CreateHostBuilder(args).Build().Run();
             }
             catch (Exception) {
-
                 throw;
             }
-
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
