@@ -1,11 +1,13 @@
-﻿using Dapper;
-using Mgutz.DapperPg.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using Dapper;
+using Mgutz.DapperPg.Models;
 
 namespace Mgutz.DapperPg.Dal {
+
     public class ProductRepository : IProductRepository {
+
         private readonly IDbConnection _dbConnection;
 
         public ProductRepository(IDbConnection conn) {
@@ -63,5 +65,7 @@ namespace Mgutz.DapperPg.Dal {
 
             await _dbConnection.ExecuteAsync(stmt, new { Id = id });
         }
+
     }
+
 }

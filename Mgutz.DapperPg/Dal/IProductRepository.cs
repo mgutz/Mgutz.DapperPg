@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Mgutz.DapperPg.Dal {
+
     public interface IProductRepository {
         ValueTask<Product> GetById(int id);
         ValueTask<Product> Add(Product entity);
@@ -10,4 +11,5 @@ namespace Mgutz.DapperPg.Dal {
         Task Remove(int id);
         Task<IEnumerable<Product>> GetAll();
     }
+
 }

@@ -11,8 +11,5 @@ services:
       - 5432:5432
     restart: unless-stopped
 
-    # vscode throws an exception during initialization when enumerating
-    # root owned docker directories. Intellisense fails. Container dir
-    # MUST exist outside of the project.
     volumes:
-      - ../_docker.vol/Mgutz.DapperPg/dev/postgres-data:/var/lib/postgresql/data
+      - ./_volumes/dev/postgres-data:/var/lib/postgresql/data

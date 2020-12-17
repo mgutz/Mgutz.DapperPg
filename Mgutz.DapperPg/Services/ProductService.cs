@@ -1,10 +1,11 @@
-using Mgutz.DapperPg.Models;
 using Mgutz.DapperPg.Dal;
+using Mgutz.DapperPg.Models;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Mgutz.DapperPg.Services {
+
     public class ProductService : IProductService {
         private readonly IProductRepository _repository;
         private readonly RequestContext _context;
@@ -40,4 +41,5 @@ namespace Mgutz.DapperPg.Services {
             await _repository.Remove(id);
         }
     }
+
 }

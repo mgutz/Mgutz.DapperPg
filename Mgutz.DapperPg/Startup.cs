@@ -1,16 +1,15 @@
-﻿using Mgutz.DapperPg.Dal;
-using Mgutz.DapperPg.Services;
+﻿using Mgutz.DapperPg.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Data;
-using Npgsql;
 
 namespace Mgutz.DapperPg {
+
     public class Startup {
+
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
@@ -19,20 +18,16 @@ namespace Mgutz.DapperPg {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
-            ColumnMapper.Initialize();
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
-
+            Dal.Startup.Configure(Configuration, services);
             services.AddHttpContextAccessor();
-            services.AddTransient<IDbConnection>(_ => new NpgsqlConnection(connectionString));
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<RequestContext>(provider => {
+            services.AddScoped(provider => {
                 var context = provider.GetRequiredService<IHttpContextAccessor>();
 
-                // TODO extract request context from header value
+                // TODO extract request context from header value (usually from JWT)
                 var token = context?.HttpContext?.Request.Headers["dummy_token"];
                 return new RequestContext { UserId = 42 };
             });
-            services.AddScoped<IProductService, ProductService>();
+            Services.Startup.Configure(Configuration, services);
             services.AddMvc();
             services.AddOpenApiDocument(config => {
                 config.Title = "ASPNET CORE 5/WebAPI/Dapper Async/PostgreSQL Prototype";
@@ -54,5 +49,7 @@ namespace Mgutz.DapperPg {
                 endpoints.MapControllers();
             });
         }
+
     }
+
 }
