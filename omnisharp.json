@@ -1,0 +1,14 @@
+{
+  "FileOptions": {
+    "systemExcludeSearchPatterns": [
+      "**/node_modules/**/*",
+      "**/bin/**/*",
+      "**/obj/**/*",
+      "**/_volumes/**/*"
+    ],
+    "excludeSearchPatterns": []
+  },
+  "FormattingOptions": {
+    "OrganizeImports": true
+  }
+}
